@@ -19,6 +19,7 @@ class Character:
 
     def __init__(self):
         name = input("Choose a name: ")
+        print('____________________________________')
         self.name = name
         print("Hi", self.name)
         self.ability_score()
@@ -32,32 +33,42 @@ class Character:
         return random.randint(1, 20) + self.mod < self.target
 
     def ability_score(self):
-        self.str = random.randint(1, 6) * 3
-        self.dex = random.randint(1, 6) * 3
-        self.con = random.randint(1, 6) * 3
-        self.intel = random.randint(1, 6) * 3
-        self.wis = random.randint(1, 6) * 3
-        self.cha = random.randint(1, 6) * 3
-        self.stats = {'str': self.str, 'dex': self.dex, 'con': self.con,
-                      'int': self.intel, 'wis': self.wis, 'cha': self.cha}
-        return self.stats
+        while not self.accept_stats:
+            print("Rolling Stats:")
+            self.str = random.randint(1, 6) * 3
+            self.dex = random.randint(1, 6) * 3
+            self.con = random.randint(1, 6) * 3
+            self.intel = random.randint(1, 6) * 3
+            self.wis = random.randint(1, 6) * 3
+            self.cha = random.randint(1, 6) * 3
+            self.stats = {'str': self.str, 'dex': self.dex, 'con': self.con,
+                          'int': self.intel, 'wis': self.wis, 'cha': self.cha}
+            self.print_stats()
+            if input('Do you accept this roll? Yes/No:') == 'Yes':
+                self.accept_stats = True
+                return self.stats
+            else:
+                self.accept_stats = False
+
 
     def print_stats(self):
         for k, v in self.stats.items():
             print(k, ':', v)
-        print(self.race)
 
     def get_race(self):
         while self.race is None:
-            print("Choose a Race :")
+            print("Races")
+            print('_____________________________')
             for i in self.races:
                 print(i)
-            self.race = input(':')
+            self.race = input('Choose a Race:')
+            print('_____________________________')
             if self.race not in self.races:
                 self.race = None
                 print('Try again')
             else:
                 return self.race
+        print('_________________________________')
         print("You have chosen:", self.race)
 
     def get_class(self):
