@@ -50,7 +50,6 @@ class Character:
             else:
                 self.accept_stats = False
 
-
     def print_stats(self):
         for k, v in self.stats.items():
             print(k, ':', v)
@@ -72,9 +71,6 @@ class Character:
         print("You have chosen:", self.race)
 
     def get_class(self):
-        pass
-
-    def level_up(self):
         pass
 
 
