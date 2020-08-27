@@ -13,12 +13,17 @@ class Character:
     wis = None
     cha = None
     stats = None
+    accept_stats = False
+    races = ['Human', 'Dwarf', 'Elf', 'Gnome', 'Halfling', 'Half-Elf', 'Half-Orc']
+    race = None
 
     def __init__(self):
         name = input("Choose a name: ")
         self.name = name
         print("Hi", self.name)
         self.ability_score()
+        self.get_race()
+        print("You have chosen", self.race)
         self.print_stats()
 
     def main_roll(self, mod, target):
@@ -40,9 +45,21 @@ class Character:
     def print_stats(self):
         for k, v in self.stats.items():
             print(k, ':', v)
+        print(self.race)
 
     def get_race(self):
-        pass
+        while self.race is None:
+            print("Choose a Race :")
+            for i in self.races:
+                print(i)
+            self.race = input(':')
+            if self.race not in self.races:
+                self.race = None
+                print('Try again')
+            else:
+                return self.race
+        print("You have chosen:", self.race)
+
 
     def get_class(self):
         pass
