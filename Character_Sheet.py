@@ -60,7 +60,6 @@ class Character:
                 return self.race
         print("You have chosen:", self.race)
 
-
     def get_class(self):
         pass
 
