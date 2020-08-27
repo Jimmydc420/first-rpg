@@ -18,6 +18,8 @@ class Character:
         name = input("Choose a name: ")
         self.name = name
         print("Hi", self.name)
+        self.ability_score()
+        self.print_stats()
 
     def main_roll(self, mod, target):
         self.mod = mod
@@ -32,11 +34,12 @@ class Character:
         self.wis = random.randint(1, 6) * 3
         self.cha = random.randint(1, 6) * 3
         self.stats = {'str': self.str, 'dex': self.dex, 'con': self.con,
-                      'intel': self.intel, 'wis': self.wis, 'cha': self.cha}
+                      'int': self.intel, 'wis': self.wis, 'cha': self.cha}
         return self.stats
 
     def print_stats(self):
-        pass
+        for k, v in self.stats.items():
+            print(k, ':', v)
 
     def get_race(self):
         pass
@@ -49,5 +52,3 @@ class Character:
 
 
 player = Character()
-player.ability_score()
-print(player.stats)
