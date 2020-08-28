@@ -2,13 +2,9 @@ import random
 
 
 class Character:
-    health = 100
-    level = 1
-    mod = None
-    target = None
     stats = None
     race = None
-    clas = None
+    character_class = None
     line = '________________________________________'
 
     def __init__(self):
@@ -24,29 +20,27 @@ class Character:
         self.adjust_ability_score()
         self.print_stats()
 
-    def main_roll(self, mod, target):
-        self.mod = mod
-        self.target = target
-        return random.randint(1, 20) + self.mod < self.target
+    @staticmethod
+    def main_roll(mod, target):
+        return random.randint(1, 20) + mod < target
 
     def ability_score(self):
         accept_stats = False
         while not accept_stats:
             print(self.line)
             print("Rolling Stats:")
-            stre = random.randint(1, 6) * 3
-            dex = random.randint(1, 6) * 3
-            con = random.randint(1, 6) * 3
-            intel = random.randint(1, 6) * 3
-            wis = random.randint(1, 6) * 3
-            cha = random.randint(1, 6) * 3
-            self.stats = {'str': stre, 'dex': dex, 'con': con,
-                          'int': intel, 'wis': wis, 'cha': cha}
+            strength = random.randint(1, 6) * 3
+            dexterity = random.randint(1, 6) * 3
+            constitution = random.randint(1, 6) * 3
+            intelligence = random.randint(1, 6) * 3
+            wisdom = random.randint(1, 6) * 3
+            charisma = random.randint(1, 6) * 3
+            self.stats = {'str': strength, 'dex': dexterity, 'con': constitution,
+                          'int': intelligence, 'wis': wisdom, 'cha': charisma}
             self.print_stats()
             print(self.line)
             if input('Do you accept this roll? Yes/No:') == 'Yes':
                 return self.stats
-                print(self.line)
             else:
                 continue
 
@@ -96,18 +90,18 @@ class Character:
     def get_class(self):
         classes = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk',
                    'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Wizard']
-        while self.clas is None:
+        while self.character_class is None:
             for i in classes:
                 print(i)
             print(self.line)
-            self.clas = input('Choose a Class:')
+            self.character_class = input('Choose a Class:')
             print(self.line)
-            if self.clas not in classes:
-                self.clas = None
+            if self.character_class not in classes:
+                self.character_class = None
                 print('Try Again')
             else:
-                print('You have chosen', self.clas)
-                return self.clas
+                print('You have chosen', self.character_class)
+                return self.character_class
 
 
 player = Character()
