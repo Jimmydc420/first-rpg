@@ -13,7 +13,6 @@ class Character:
     wis = None
     cha = None
     stats = None
-    accept_stats = False
     races = ['Human', 'Dwarf', 'Elf', 'Gnome', 'Halfling', 'Half-Elf', 'Half-Orc']
     race = None
 
@@ -22,6 +21,7 @@ class Character:
         print('____________________________________')
         self.name = name
         print("Hi", self.name)
+        print('____________________________________')
         self.ability_score()
         self.get_race()
         print("You have chosen", self.race)
@@ -33,8 +33,10 @@ class Character:
         return random.randint(1, 20) + self.mod < self.target
 
     def ability_score(self):
-        while not self.accept_stats:
+        accept_stats = False
+        while not accept_stats:
             print("Rolling Stats:")
+            print('________________________________')
             self.str = random.randint(1, 6) * 3
             self.dex = random.randint(1, 6) * 3
             self.con = random.randint(1, 6) * 3
@@ -45,10 +47,9 @@ class Character:
                           'int': self.intel, 'wis': self.wis, 'cha': self.cha}
             self.print_stats()
             if input('Do you accept this roll? Yes/No:') == 'Yes':
-                self.accept_stats = True
                 return self.stats
             else:
-                self.accept_stats = False
+                continue
 
     def print_stats(self):
         for k, v in self.stats.items():
@@ -67,8 +68,6 @@ class Character:
                 print('Try again')
             else:
                 return self.race
-        print('_________________________________')
-        print("You have chosen:", self.race)
 
     def get_class(self):
         pass
